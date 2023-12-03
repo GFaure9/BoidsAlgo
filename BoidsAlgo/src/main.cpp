@@ -6,9 +6,9 @@
 
 int main(int argc, char* argv[])
 {
-	// retrieving input values (n, max_t, dt, fname_positions, fname_velocities) for Boids instance
+	// Retrieving input values (n, max_t, dt, fname_positions, fname_velocities) for Boids instance
 
-	// verify the number of passed arguments (must be 9)
+	// Verify the number of passed arguments (must be 9)
 	if (argc != 10) // we include program's name in the arguments (=> 10 and not 9 args)
 	{
 		std::cerr << "Usage: " << argv[0] << "\nValueError: you must provide the following arguments:" << std::endl;
@@ -18,22 +18,22 @@ int main(int argc, char* argv[])
 		return 1; // indicates an error
 	}
 
-	// parsing the arguments
+	// Parsing the arguments
 	int n_boids = std::atoi(argv[1]); // convert to int
 	double maximal_time = std::atof(argv[2]); // convert to double
 	double time_step = std::atof(argv[3]);
 	int samples_period = std::atoi(argv[4]);
-	double separation_coefficient = std::atof(argv[5]);
-	double cohesion_coefficient = std::atof(argv[6]);
+	double cohesion_coefficient = std::atof(argv[5]);
+	double separation_coefficient = std::atof(argv[6]);
 	double alignment_coefficient = std::atof(argv[7]);
-	double cohesion_distance = std::atof(argv[8]);
+	double separation_distance = std::atof(argv[8]);
 	std::string positions_filename = argv[9]; // string type
 
-	// instantiate Boids
+	// Instantiate Boids
 	Boids boids(
 		n_boids, maximal_time, time_step, samples_period,
-		separation_coefficient, cohesion_coefficient, alignment_coefficient,
-		cohesion_distance,
+		cohesion_coefficient, separation_coefficient, alignment_coefficient,
+		separation_distance,
 		positions_filename
 	);
 	std::cout << "|INFO| Starting a simulation with:" << std::endl;
@@ -43,15 +43,15 @@ int main(int argc, char* argv[])
 	std::cout << "		* Separation coefficient = " << separation_coefficient << std::endl;
 	std::cout << "		* Cohesion coefficient = " << cohesion_coefficient << std::endl;
 	std::cout << "		* Alignment coefficient = " << alignment_coefficient << std::endl;
-	std::cout << "		* Cohesion distance = " << cohesion_distance << std::endl;
+	std::cout << "		* Separation distance = " << separation_distance << std::endl;
 	int n_samples = static_cast<int>(maximal_time / time_step / samples_period);
 	std::cout << "		* Number of samples = " << n_samples << "\n" << std::endl;
 
 
-	// initialize the simulation
+	// Initialize the simulation
 	boids.initSim();
 
-	// run the simulation
+	// Run the simulation
 	boids.run();
 	std::cout << "\n|INFO| Finished running simulation!" << std::endl;
 	std::cout << "|INFO| Boids positions stored at: " << positions_filename << std::endl;

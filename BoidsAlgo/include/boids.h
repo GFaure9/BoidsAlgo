@@ -16,15 +16,15 @@ public:
 	double separation_coef;
 	double cohesion_coef;
 	double alignment_coef;
-	double cohesion_dist;
+	double separation_dist;
 	std::vector<Vector3d> positions;
 	std::vector<Vector3d> velocities;
 	std::string fname_positions;
 
 	Boids(
 		int n, double max_t, double dt, int sampling_period,
-		double separation_coef, double cohesion_coef, double alignment_coef,
-		double cohesion_dist,
+		double cohesion_coef, double separation_coef, double alignment_coef,
+		double separation_dist,
 		std::string fname_positions
 	);
 

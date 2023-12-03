@@ -4,19 +4,21 @@
 #include "vector3d.h"
 
 
+// Constructor to initialize an instance of Boids class
 Boids::Boids(
     int n, double max_t, double dt, int sampling_period,
-    double separation_coef, double cohesion_coef, double alignment_coef,
-    double cohesion_dist,
+    double cohesion_coef, double separation_coef, double alignment_coef,
+    double separation_dist,
     std::string fname_positions
     ) :
     n(n), max_t(max_t), dt(dt), sampling_period(sampling_period),
-    separation_coef(separation_coef), cohesion_coef(cohesion_coef), alignment_coef(alignment_coef),
-    cohesion_dist(cohesion_dist),
+    cohesion_coef(cohesion_coef), separation_coef(separation_coef), alignment_coef(alignment_coef),
+    separation_dist(separation_dist),
     fname_positions(fname_positions)
 {
 };
 
+// Function to retrurn a random double type number between 0.0 and 1.0
 double randomDouble()
 {
     static std::random_device rd;
@@ -25,10 +27,13 @@ double randomDouble()
     return dis(gen);
 };
 
+// Method to initialize a simulation of boids
+// All boids positions are randomly chosen in a unit cube
+// All boids velocities are set to -0.01 u_x + 0.01 u_y
 void Boids::initSim()
 {
     // initialize positions with random reals between 0.0 and 1.0
-    // and initialize velocities with zeros
+    // and initialize velocities to (0.01, -0.01, 0.0)
     for (int i = 0; i < n; ++i)
     {
         double x = randomDouble();
